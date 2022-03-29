@@ -1,17 +1,24 @@
 import { useLocalContext } from "./context/context.js";
-import Signin from "./components/signin/signin.js";
-import Loading from "./components/loading/loading.js"
+import { Loading, Signin, Home } from "./components";
+import { useEffect } from "react";
 function App() {
   // You have to get a specific var, otherwise it returns null
-  const { appState } = useLocalContext();
+  const { appState, setAppState } = useLocalContext();
 
   console.log(appState);
-    
+  
+  useEffect(() => {
+    if (appState === 'loading'){
+      setTimeout(() => {
+        setAppState('home')
+      }, 5000)
+    }
+  })
   return (
     <div className="App">
-      {appState == "home" && <h1>Home</h1>}
-      {appState == "login" &&<Signin></Signin>}
-      {appState == "loading" &&<Loading></Loading>}
+      {appState === "home" && <Home></Home>}
+      {appState === "login" &&<Signin></Signin>}
+      {appState === "loading" &&<Loading></Loading>}
     </div>
   );
 }
