@@ -16,7 +16,7 @@ export function ContextProvider({ children }){
     useEffect(() => {
         // some logic is executed whenever val in [] is changed
         // if [] empty, runs once
-        console.log(currentUser)
+        
         auth.onAuthStateChanged((user) => {
             if (user){
                 setAppState("loading")
@@ -25,6 +25,7 @@ export function ContextProvider({ children }){
                 setCurrentUser(null)
                 setAppState("login")
             }
+            //console.log("currentUser",currentUser)
         })
     },[]);
 
