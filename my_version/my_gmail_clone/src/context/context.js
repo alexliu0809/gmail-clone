@@ -14,6 +14,7 @@ export function ContextProvider({ children }){
     const [appState, setAppState] = useState("login");
     const [drawerOpen, setdrawerOpen] = useState(true);
     const [activeSideBarTab, setactiveSideBarTab] = useState("Inbox");
+    const [composeOpen, setcomposeOpen] = useState(true);
     
     useEffect(() => {
         // some logic is executed whenever val in [] is changed
@@ -39,6 +40,8 @@ export function ContextProvider({ children }){
         setdrawerOpen,
         activeSideBarTab, 
         setactiveSideBarTab,
+        composeOpen,
+        setcomposeOpen
     };
 
     return(

@@ -36,7 +36,7 @@ const Sidebar = () => {
       }));
 
 
-    const {currentUser, drawerOpen, setComposeOpen} = useLocalContext();
+    const {currentUser, drawerOpen, composeOpen, setcomposeOpen} = useLocalContext();
     const classes = useStyles();
 
     return (
@@ -60,7 +60,7 @@ const Sidebar = () => {
                     className={`sidebar__compose ${
                     !drawerOpen && "sidebar__composeClose"
                     }`}
-                    onClick={() => setComposeOpen(true)}
+                    onClick={() => setcomposeOpen(!composeOpen)}
                 >
                 <img
                 className="sidebar__addIMG"
