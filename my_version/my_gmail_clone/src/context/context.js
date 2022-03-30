@@ -14,7 +14,7 @@ export function ContextProvider({ children }){
     const [appState, setAppState] = useState("login");
     const [drawerOpen, setdrawerOpen] = useState(true);
     const [activeSideBarTab, setactiveSideBarTab] = useState("Inbox");
-    const [composeOpen, setcomposeOpen] = useState(true);
+    const [composeOpen, setcomposeOpen] = useState(false);
     
     useEffect(() => {
         // some logic is executed whenever val in [] is changed

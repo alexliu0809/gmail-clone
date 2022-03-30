@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLocalContext } from '../../context/context'
-import { Header, Sidebar, Compose } from "..";
+import { Header, Sidebar, Compose, Main} from "..";
 
 
 import './styles.css'
@@ -12,7 +12,10 @@ const Home = () => {
         <div className='home'>
             {composeOpen && <Compose />}
             <Header />
-            <Sidebar />
+            <Sidebar>
+                <Main>
+                </Main>
+            </Sidebar>
         </div>
     )
 }
