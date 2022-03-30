@@ -12,6 +12,8 @@ export function useLocalContext(){
 export function ContextProvider({ children }){
     const [currentUser, setCurrentUser] = useState('');
     const [appState, setAppState] = useState("login");
+    const [drawerOpen, setdrawerOpen] = useState(true);
+    const [activeSideBarTab, setactiveSideBarTab] = useState("Inbox");
     
     useEffect(() => {
         // some logic is executed whenever val in [] is changed
@@ -33,6 +35,10 @@ export function ContextProvider({ children }){
         currentUser,
         appState,
         setAppState,
+        drawerOpen, 
+        setdrawerOpen,
+        activeSideBarTab, 
+        setactiveSideBarTab,
     };
 
     return(

@@ -30,7 +30,7 @@ const Header = () => {
     var open = Boolean(anchorEl);
     const id = open ? "simple-popover" : undefined;
 
-    const {currentUser} = useLocalContext();
+    const {currentUser, setdrawerOpen, drawerOpen} = useLocalContext();
     
     const signout = () => {
         auth.signOut();
@@ -50,6 +50,7 @@ const Header = () => {
             <div className='home__left'>
                 <Menu
                 className="home__menuIcon"
+                onClick={() => setdrawerOpen(!drawerOpen)}
                 />
                 <img className="home__logo" src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_dark_1x_r2.png" alt="Gmail" />
             </div>
