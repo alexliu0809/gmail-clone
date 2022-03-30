@@ -4,7 +4,7 @@ import './styles.css'
 import { useLocalContext } from '../../context/context'
 import { FormatColorTextSharp } from '@material-ui/icons';
 import { Avatar, Badge, Drawer, makeStyles } from "@material-ui/core";
-import SidebarNavBtn from './sidebarnavbtns';
+import SidebarNavBtn, {MeetBtn, HangoutBtn}  from './sidebarnavbtns';
 
 const drawerWidth = 256;
 
@@ -69,10 +69,11 @@ const Sidebar = () => {
                 />
                 <p>Compose</p>
                 </div>
-                
+
                 <SidebarNavBtn>
                 </SidebarNavBtn>
-
+                <MeetBtn />
+                <HangoutBtn />
                 </Drawer>
             </div>
         </div>
