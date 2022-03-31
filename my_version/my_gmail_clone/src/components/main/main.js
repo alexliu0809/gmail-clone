@@ -11,6 +11,7 @@ import {
 import React, { useState } from "react";
 import { useLocalContext } from '../../context/context'
 import "./styles.css";
+import { Mail } from "..";
 
 const Main = () => {
     const { drawerOpen } = useLocalContext();
@@ -58,6 +59,33 @@ const Main = () => {
                 </div>
             </div>
 
+        </div>
+
+        <div className="main__mails">
+            <Mail />
+            <Mail />
+            <Mail />
+            <Mail />
+            <Mail />
+            <Mail />
+            <Mail />
+            <Mail />
+            <Mail />
+            <Mail />
+            <Mail />
+            <Mail />
+            <Mail />
+            <Mail />
+            <Mail />
+            <Mail />
+            <Mail />
+            <Mail />
+            <Mail />
+            <Mail />
+            <Mail />
+            <Mail />
+            <Mail />
+            <Mail />
         </div>
 
     </div>
