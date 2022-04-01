@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { ContextProvider } from './context/context';
+import { MailContextProvider } from './context/mailcontext';
 
 // Wrap app in context
 ReactDOM.render(
   <ContextProvider>
-    <App />
+    <MailContextProvider>
+      <App />
+    </MailContextProvider>
   </ContextProvider>,
   document.getElementById('root')
 );

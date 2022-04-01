@@ -1,0 +1,22 @@
+[
+    {
+    "participant_id": 0,
+    "participant_email": "hsyalexliu0809@gmail.com",
+    "from": "test@ucsd.edu",
+    "mailfrom": "test@ucsd.edu",
+    "to": "hsyalexliu0809@gmail.com",
+    "body": "Hi, this is a test email",
+    "subject": "Subject 1",
+    "date": "2020-03-30, 11:09"
+  },
+  {
+    "participant_id": 0,
+    "participant_email": "hsyalexliu0809@gmail.com",
+    "from": "user@ucsd.edu",
+    "mailfrom": "user@ucsd.edu",
+    "to": "hsyalexliu0809@gmail.com",
+    "body": "Hi, this is a test email from user",
+    "subject": "Subject 2",
+    "date": "2020-03-30, 11:09"
+  }
+]

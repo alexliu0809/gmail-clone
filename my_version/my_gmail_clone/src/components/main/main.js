@@ -12,6 +12,7 @@ import React, { useState } from "react";
 import { useLocalContext } from '../../context/context'
 import "./styles.css";
 import { Mail } from "..";
+import {GenMailsFromConfFile} from "../mail/mail"
 
 const Main = () => {
     const { drawerOpen } = useLocalContext();
@@ -62,30 +63,8 @@ const Main = () => {
         </div>
 
         <div className="main__mails">
-            <Mail />
-            <Mail />
-            <Mail />
-            <Mail />
-            <Mail />
-            <Mail />
-            <Mail />
-            <Mail />
-            <Mail />
-            <Mail />
-            <Mail />
-            <Mail />
-            <Mail />
-            <Mail />
-            <Mail />
-            <Mail />
-            <Mail />
-            <Mail />
-            <Mail />
-            <Mail />
-            <Mail />
-            <Mail />
-            <Mail />
-            <Mail />
+            <GenMailsFromConfFile >
+            </GenMailsFromConfFile>
         </div>
 
     </div>
