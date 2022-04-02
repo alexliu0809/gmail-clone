@@ -41,6 +41,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    user-select: none;
   }
   .mail__body {
     overflow: hidden;
@@ -58,11 +59,11 @@
  
   }
   .mail__date__container{
-    justify-content: flex-end;
+    text-align: end;
     width: 60px;
   }
 
   .mail__from__name__container{
-    justify-content: left;
+    text-align: left;
     width: 168px;
   }
