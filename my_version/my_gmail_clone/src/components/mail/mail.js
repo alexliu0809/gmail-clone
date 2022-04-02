@@ -1,6 +1,6 @@
 import { Checkbox } from "@material-ui/core";
 import { Label, LabelOutlined, Star, StarBorder } from "@material-ui/icons";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { useLocalContect, useLocalContext } from "../../context/context";
 import { useMailContext } from '../../context/mailcontext'
@@ -14,10 +14,13 @@ import { useEffect } from "react";
 
 
 const Mail = ({ data }) => {
+  const parentARef = useRef();
+
   console.log("data", data);
 
   const [starred, setstarred] = useState(false);
   const [important, setimportant] = useState(false);
+  const [refresh, setRefresh] = useState(false);
   
   const [read, setread] = useState(data.read);
   
@@ -26,12 +29,18 @@ const Mail = ({ data }) => {
   const [id, setid] = useState("");
   
   //console.log("read initial state", read);
+  
+  useEffect(() => {
+    console.log("useEffect data")
+    setread(data.read)
+  }, [data,refresh]);
 
   const updateRead =() => {
-    console.log("read before", read);
-    setread(!read);
+    console.log("read before", data.read);
+    //setread(!read);
     data.read = !data.read
-    console.log("read after", read);
+    setRefresh(!refresh)
+    console.log("read after", data.read);
   }
 
   const createMailId = () => {

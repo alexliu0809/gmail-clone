@@ -124,7 +124,7 @@ import { useEffect } from "react";
 
 // export default MailComp2;
 
-class MailComp extends React.Component {
+class MailComp extends React.forwardRef {
 
     constructor(props) {
         super(props)

@@ -80,9 +80,9 @@ const Main = () => {
 
         <div className="main__mails" id="main_mailsofwindow">
             {mailsOfWindow != undefined && 
-                
             mailsOfWindow.map((mailcomp, _) => (
-            ReactDOM.render(mailcomp, document.getElementById('root'))
+            <Mail data={mailcomp.state}>
+            </Mail>
             ))
             }
         </div>
