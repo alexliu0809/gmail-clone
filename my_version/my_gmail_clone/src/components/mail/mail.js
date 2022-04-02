@@ -71,8 +71,6 @@ const Mail = ({ mailState }) => {
     onClick={showMailAndUpdateRead}
     >
 
-
-      
         <Checkbox className="mail--colorGray mail--hoverBlack">
 
         </Checkbox>
