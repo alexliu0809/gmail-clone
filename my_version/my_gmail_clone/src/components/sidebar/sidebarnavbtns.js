@@ -4,6 +4,7 @@ import { Badge } from "@material-ui/core";
 import { VideocamOff } from "@material-ui/icons";
 import { Inbox, Keyboard, Videocam } from "@material-ui/icons";import React, { useState } from "react";
 import { useLocalContext } from '../../context/context'
+import { useMailContext } from '../../context/mailcontext'
 
 
 
@@ -24,13 +25,13 @@ export default SidebarNavBtn;
 
 const SideButton = (props) => {
     const {drawerOpen, setactiveSideBarTab, activeSideBarTab} = useLocalContext();
-
+    const {mailsType, setmailsType} = useMailContext();
 
     return (
         <div className={`sidebar__btn sidebar__topBtn ${
             !drawerOpen && "sidebar__btnClose"
               } ${activeSideBarTab === props.name && "sidebar__active"}`}
-              onClick={() => setactiveSideBarTab(props.name)}
+              onClick={() => {setactiveSideBarTab(props.name);}}
               >
             <div
             className={`sidebar__btnLeft ${

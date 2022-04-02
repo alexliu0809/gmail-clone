@@ -9,6 +9,8 @@ import SidebarNavBtn, {MeetBtn, HangoutBtn}  from './sidebarnavbtns';
 const drawerWidth = 256;
 
 const Sidebar = ( { children }) => {
+    
+
     // imported from material-ui
     const useStyles = makeStyles((theme) => ({
         root: {

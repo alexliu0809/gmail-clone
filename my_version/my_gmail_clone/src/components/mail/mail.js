@@ -3,35 +3,36 @@ import { Label, LabelOutlined, Star, StarBorder } from "@material-ui/icons";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useLocalContect, useLocalContext } from "../../context/context";
+import { useMailContext } from '../../context/mailcontext'
 import { db } from "../../lib/firebase";
 import "./styles.css";
 
-import mails_data from './mail_conf.json';
 
 import {v4 as uuidv4} from "uuid";
 import { useEffect } from "react";
 
 
 
-const Mail = (data) => {
+const Mail = ({ data }) => {
+  console.log("data", data);
+
   const [starred, setstarred] = useState(false);
   const [important, setimportant] = useState(false);
-
+  
+  const [read, setread] = useState(data.read);
+  
   const {currentUser} = useLocalContext();
 
   const [id, setid] = useState("");
+  
+  //console.log("read initial state", read);
 
-  const from = data.from;
-  const body = data.body;
-  const subject = data.subject;
-  const date = data.date;
-
-
-  useEffect(() =>{
-    if (id === ""){
-      setid(uuidv4());
-    }
-  },[])
+  const updateRead =() => {
+    console.log("read before", read);
+    setread(!read);
+    data.read = !data.read
+    console.log("read after", read);
+  }
 
   const createMailId = () => {
     if (id === ""){
@@ -63,7 +64,9 @@ const Mail = (data) => {
   }
   
   return (
-    <div className="mail">
+    <div className={`mail ${read === false && 'mail--unread'}`}
+    onClick={updateRead}
+    >
       <Checkbox className="mail--colorGray mail--hoverBlack">
 
       </Checkbox>
@@ -101,12 +104,12 @@ const Mail = (data) => {
 
     <div className="mail__texts">
         {/* //? Sender's name */}
-        <p className="mail__text">{from}</p>
+        <p className="mail__text">{data.from_name}</p>
         <div className="mail__titleSubtitle">
-          <p className="mail__text">{subject}</p>
-          <p className="mail__text mail__body"> - {body}</p>
+          <p className="mail__text">{data.subject}</p>
+          <p className="mail__text mail__body"> - {data.body}</p>
         </div>
-        <p className="mail__text">{date}</p>
+        <p className="mail__text">{data.date}</p>
       </div>
 
     </div>
@@ -120,17 +123,4 @@ const Mail = (data) => {
 export default Mail;
 
 
-export const GenMailsFromConfFile = () =>{
-  let mailArray = []
-  // console.log("Mails",mails_data);
-  for (let i = 0; i < mails_data.length; i++) {
-    let mail_data = mails_data[i]
-    const one_mail_data_point = Mail(mail_data)
-    mailArray.push(one_mail_data_point)
-  }
-  return (
-    <>
-    {mailArray}
-    </>
-  )
-}
+

@@ -1,5 +1,7 @@
 import { Checkbox } from "@material-ui/core";
 import { CheckBox } from "@material-ui/icons";
+import { useEffect } from "react";
+
 import {
   Error,
   Inbox,
@@ -10,13 +12,14 @@ import {
 } from "@material-ui/icons";
 import React, { useState } from "react";
 import { useLocalContext } from '../../context/context'
+import { useMailContext } from '../../context/mailcontext'
+
 import "./styles.css";
 import { Mail } from "..";
-import {GenMailsFromConfFile} from "../mail/mail"
 
 const Main = () => {
-    const { drawerOpen } = useLocalContext();
-    const [ activeMainTab, setactiveMainTab ] = useState("Primary")
+    const { drawerOpen, activeSideBarTab, activeMainTab, setactiveMainTab } = useLocalContext();
+    const { mailsOfWindow, primaryUnreadNumber, socialUnreadNumber, promoUnreadNumber } = useMailContext();
 
   return (
     <div className={`main ${drawerOpen && "main--fullWidth"}`}>
@@ -28,16 +31,21 @@ const Main = () => {
             <MoreVert>
             </MoreVert>
         </div>
+        
+        {activeSideBarTab === 'Inbox' &&
 
-        <div className="main__tabs">
+            <div className="main__tabs">
             <div className={`main__tab ${activeMainTab === "Primary" && " main__tabPrimary--active"}`}
             onClick={() => {setactiveMainTab("Primary")}}
             >
                 <Inbox />
                 <p>Primary</p>
+                {primaryUnreadNumber !== 0 && 
                 <div className="mail__unread primary--unread">
-                5 new
+                {primaryUnreadNumber} new
                 </div>
+                }
+                
             </div>
 
             <div className={`main__tab ${activeMainTab === "Social" && " main__tabSocial--active"}`}
@@ -45,9 +53,12 @@ const Main = () => {
             >
                 <People />
                 <p>Social</p>
+                {socialUnreadNumber !== 0 &&
                 <div className="mail__unread social--unread">
-                5 new
+                {socialUnreadNumber} new
                 </div>
+                }
+                
             </div>
 
             <div className={`main__tab ${activeMainTab === "Promotions" && " main__tabPromotions--active"}`}
@@ -55,16 +66,21 @@ const Main = () => {
             >
                 <LocalOffer />
                 <p>Promotions</p>
-                <div className="mail__unread promotions--unread">
-                5 new
-                </div>
+                { promoUnreadNumber !== 0 &&
+                    <div className="mail__unread promotions--unread">
+                    {promoUnreadNumber} new
+                    </div>
+                }
+                
             </div>
 
         </div>
+        }
 
         <div className="main__mails">
-            <GenMailsFromConfFile >
-            </GenMailsFromConfFile>
+            {mailsOfWindow != undefined && mailsOfWindow.map((mail, _) => (
+            <Mail data={mail}/>
+            ))}
         </div>
 
     </div>
