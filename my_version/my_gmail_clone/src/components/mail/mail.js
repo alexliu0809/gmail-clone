@@ -35,7 +35,12 @@ const Mail = ({ mailState }) => {
     setread(mailState.state.read)
   }, [mailState,refresh]);
 
-  const showMailAndUpdateRead =() => {
+  const showMailAndUpdateRead =(e) => {
+    // Don't know trigger show mail if click on star / important / select
+    console.log(e.target)
+    if (e.target.type  === "checkbox" || e.target.nodeName === "svg" || e.target.nodeName === "path"){
+      return;
+    }
     //setread(!read);
     if (mailState.state.read == false){
       mailState.state.read = true

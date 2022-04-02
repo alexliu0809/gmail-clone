@@ -38,11 +38,12 @@
   height: 45px !important;
 }
 
-.sidebar__btns {
+.sidebar__icon {
   max-height: 350px;
   height: 150px;
   min-height: 100px;
   overflow: auto;
+  color: #cdd1d5;
 }
 
 .sidebar__btn {
@@ -70,9 +71,6 @@
   height: 30px;
 }
 
-.sidebar__icon {
-  color: #cdd1d5;
-}
 
 .sidebar__btnLeft {
   display: flex;
@@ -82,11 +80,19 @@
 }
 
 .sidebar__btnLeft > p {
+  font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+  font-size: .875rem;
   margin-left: 10px;
-  font-weight: 700;
+  /* font-weight: 700; */
   color: rgba(255, 255, 255, 1) !important;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65) !important;  
+  letter-spacing: .2px;
 }
+
+.sidebar__btnLeft__bold__p {
+  font-weight: bold;
+}
+
 .sidebar__active {
   background-color: rgba(255, 255, 255, 0.3) !important;
 }

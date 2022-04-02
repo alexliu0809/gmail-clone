@@ -9,13 +9,14 @@ import { useMailContext } from '../../context/mailcontext'
 import { useNavigate } from "react-router-dom";
 
 
+// <SideButton name="Starred" />
+
 const SidebarNavBtn = () => {  
 
   return (
       <div className="sidebar__btns">
         <SideButton name="Inbox" />
         <SideButton name="Sent" />
-        <SideButton name="Starred" />
         <SideButton name="All Mail" />
         <SideButton name="Spam" />
       </div>
@@ -28,7 +29,7 @@ const SideButton = (props) => {
     const navigate = useNavigate();
 
     const {drawerOpen, setactiveSideBarTab, activeSideBarTab} = useLocalContext();
-    const {mailsType, setmailsType} = useMailContext();
+    const {primaryUnreadNumber, socialUnreadNumber, promoUnreadNumber} = useMailContext();
 
     return (
         <div className={`sidebar__btn sidebar__topBtn ${
@@ -44,7 +45,12 @@ const SideButton = (props) => {
                   {drawerOpen ? (
                       <>
                       <Inbox className="sidebar__icon" />
-                      <p>{props.name}</p>
+                        <p 
+                        className={`${(props.name === 'Inbox' || activeSideBarTab === props.name) 
+                        && "sidebar__btnLeft__bold__p"}`}
+                        >
+                        {props.name}
+                        </p>
                       </>
                   ) : (
                       <Badge badgeContent={0} color="error">
@@ -54,7 +60,19 @@ const SideButton = (props) => {
              </div>
   
             <div className={`sidebar__unread ${!drawerOpen && `sidebar__unreadClose`}`}>
-                <p>10</p>
+                {
+                    (props.name === 'Inbox' || props.name === 'All Mail') ? (
+                        primaryUnreadNumber+socialUnreadNumber+promoUnreadNumber > 0 ? (
+                            <p>{primaryUnreadNumber+socialUnreadNumber+promoUnreadNumber}</p>
+                        ) : (
+                            <p></p>
+                        )
+                        
+                    ) : (
+                        <p></p>
+                    )
+                }
+                
             </div>
           </div>
 
