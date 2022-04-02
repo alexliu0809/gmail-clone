@@ -5,9 +5,8 @@ import mails_data from './mail_conf.json';
 import { db } from "../lib/firebase";
 import ReactDOM from 'react-dom';
 
-import { MailComp } from "../components";
+import { MailState } from "../components";
 import React from 'react'
-
 
 
 const MailContext = createContext()
@@ -19,7 +18,8 @@ export function useMailContext(){
 
 export function MailContextProvider({children}){
     const [receiveMails,setreceiveMails] = useState([])
-    const [allMails, setallMails] = useState([])
+    const [mailReadRefresh, setmailReadRefresh] = useState([])
+    const [allMailStates, setallMailStates] = useState([])
     const [mailsOfWindow,setmailsOfWindow] = useState([])
 
     const [primaryUnreadNumber, setprimaryUnreadNumber] = useState(0)
@@ -27,7 +27,7 @@ export function MailContextProvider({children}){
     const [promoUnreadNumber, setpromoUnreadNumber] = useState(0)
 
 
-    let mailArray = []
+    let mailStateArray = []
 
     const {currentUser, activeSideBarTab, activeMainTab} = useLocalContext();
 
@@ -36,7 +36,7 @@ export function MailContextProvider({children}){
         
         // console.log("Mails",mails_data);
         for (let i = 0; i < mails_data.length; i++) {
-          const instance = new MailComp({
+          const instance = new MailState({
             participant_id:mails_data[i].participant_id,
             participant_email:mails_data[i].participant_email,
             from:mails_data[i].from,
@@ -47,27 +47,15 @@ export function MailContextProvider({children}){
             subject:mails_data[i].subject,
             read:mails_data[i].read,
             category: mails_data[i].category,
-            date: mails_data[i].date
+            date: mails_data[i].date,
+            id: mails_data[i].id,
         });
 
-        // const instance = <MailComp2 
-        //     participant_id={mails_data[i].participant_id}
-        //     participant_email={mails_data[i].participant_email}
-        //     from={mails_data[i].from}
-        //     from_name={mails_data[i].from_name}
-        //     mailfrom={mails_data[i].mailfrom}
-        //     to={mails_data[i].to}
-        //     body={mails_data[i].body}
-        //     subject={mails_data[i].subject}
-        //     read={mails_data[i].read}
-        //     category={mails_data[i].category}
-        //     date={mails_data[i].date}
-        // />
           console.log("instance",instance,instance.state.from,instance.state.from_name);
-          mailArray.push(instance)
+          mailStateArray.push(instance)
         }
 
-        setallMails(mailArray)
+        setallMailStates(mailStateArray)
     }
 
     /*
@@ -89,32 +77,32 @@ export function MailContextProvider({children}){
     },[])
 
     useEffect (() => {
-        console.log("allMails", allMails)
-        setprimaryUnreadNumber(allMails.filter((e) => {
+        console.log("allMailStates", allMailStates)
+        setprimaryUnreadNumber(allMailStates.filter((e) => {
             return e.state.read === false && e.state.category === "Primary"
         }).length);
 
-        setsocialUnreadNumber(allMails.filter((e) => {
+        setsocialUnreadNumber(allMailStates.filter((e) => {
             return e.state.read === false && e.state.category === "Social"
         }).length);
 
-        setpromoUnreadNumber(allMails.filter((e) => {
+        setpromoUnreadNumber(allMailStates.filter((e) => {
             return e.state.read === false && e.state.category === "Promotions"
         }).length);
-    },[allMails])
+    },[allMailStates, mailReadRefresh])
 
     useEffect (() => {
         if (activeSideBarTab === 'Inbox'){
-            console.log("New mailsType", activeMainTab, allMails.filter((mail)=>mail.state.category===activeMainTab))
-            setmailsOfWindow(allMails.filter((mail)=>mail.state.category===activeMainTab))
+            console.log("New mailsType", activeMainTab, allMailStates.filter((mail)=>mail.state.category===activeMainTab))
+            setmailsOfWindow(allMailStates.filter((mail)=>mail.state.category===activeMainTab))
         } else if (activeSideBarTab === 'All Mail'){
-            setmailsOfWindow(allMails.filter(()=>true))
+            setmailsOfWindow(allMailStates.filter(()=>true))
         } else {
             setmailsOfWindow([])
         }
-    },[activeSideBarTab,activeMainTab,allMails])
+    },[activeSideBarTab,activeMainTab,allMailStates])
     
-    const value={setmailsOfWindow,mailsOfWindow,primaryUnreadNumber,socialUnreadNumber,promoUnreadNumber}
+    const value={setmailsOfWindow,mailsOfWindow,primaryUnreadNumber,socialUnreadNumber,promoUnreadNumber,mailReadRefresh, setmailReadRefresh, allMailStates}
 
 
 

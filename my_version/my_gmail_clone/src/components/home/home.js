@@ -1,11 +1,11 @@
 import React from 'react'
 import { useLocalContext } from '../../context/context'
-import { Header, Sidebar, Compose, Main} from "..";
+import { Header, Sidebar, Compose, Main, ViewMail} from "..";
 
 
 import './styles.css'
 
-const Home = () => {
+const Home = ({showMails=true, mailState}) => {
     const {composeOpen, setcomposeOpen} = useLocalContext();
 
     return (
@@ -13,8 +13,12 @@ const Home = () => {
             {composeOpen && <Compose />}
             <Header />
             <Sidebar>
-                <Main>
-                </Main>
+                {showMails ? (
+                    <Main>
+
+                    </Main>
+                ) : (<ViewMail mailState={mailState}></ViewMail>)
+                }
             </Sidebar>
         </div>
     )

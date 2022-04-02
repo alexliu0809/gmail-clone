@@ -10,7 +10,8 @@
     "subject": "Subject 1",
     "read": false,
     "category": "Primary",
-    "date": "2020-03-30, 11:09"
+    "date": "2020-03-30, 11:09",
+    "id": 0
   },
   {
     "participant_id": 0,
@@ -23,7 +24,8 @@
     "subject": "Subject 2",
     "read": true,
     "category": "Primary",
-    "date": "2020-03-30, 11:09"
+    "date": "2020-03-30, 11:09",
+    "id": 1
   },
   {
     "participant_id": 0,
@@ -36,6 +38,8 @@
     "subject": "Subject Promo",
     "read": true,
     "category": "Promotions",
-    "date": "2020-03-30, 11:09"
+    "date": "2020-03-30, 11:09",
+    "id": 2
+    
   }
 ]

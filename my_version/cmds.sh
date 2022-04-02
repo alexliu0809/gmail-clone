@@ -6,3 +6,5 @@ yarn add firebase
 yarn add uuid
 npm i @material-ui/core @material-ui/icons
 npm install --save clsx
+yarn add react-router-dom
+firebase deploy

@@ -1,7 +1,6 @@
 import { Checkbox } from "@material-ui/core";
 import { Label, LabelOutlined, Star, StarBorder } from "@material-ui/icons";
-import React, { useState, useRef } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState, useRef, useHistory } from "react";
 import { useLocalContect, useLocalContext } from "../../context/context";
 import { useMailContext } from '../../context/mailcontext'
 import { db } from "../../lib/firebase";
@@ -12,35 +11,39 @@ import {v4 as uuidv4} from "uuid";
 import { useEffect } from "react";
 
 
+import { useNavigate } from "react-router-dom";
 
-const Mail = ({ data }) => {
+
+const Mail = ({ mailState }) => {
   const parentARef = useRef();
 
-  console.log("data", data);
+  console.log("Incoming mailState for Mail", mailState);
 
   const [starred, setstarred] = useState(false);
   const [important, setimportant] = useState(false);
   const [refresh, setRefresh] = useState(false);
-  
-  const [read, setread] = useState(data.read);
-  
+  const [read, setread] = useState(mailState.state.read);
   const {currentUser} = useLocalContext();
-
+  const {mailReadRefresh, setmailReadRefresh} = useMailContext();
   const [id, setid] = useState("");
+
+  const navigate = useNavigate();
   
   //console.log("read initial state", read);
   
   useEffect(() => {
-    console.log("useEffect data")
-    setread(data.read)
-  }, [data,refresh]);
+    setread(mailState.state.read)
+  }, [mailState,refresh]);
 
   const updateRead =() => {
-    console.log("read before", data.read);
     //setread(!read);
-    data.read = !data.read
+    mailState.state.read = !mailState.state.read
     setRefresh(!refresh)
-    console.log("read after", data.read);
+    setmailReadRefresh(!mailReadRefresh)
+    console.log("read after", mailState.state.read);
+
+    // redirect to mailState.state.full_id
+    navigate(`/${mailState.state.full_id}`)
   }
 
   const createMailId = () => {
@@ -70,6 +73,7 @@ const Mail = ({ data }) => {
     }).catch((err)=>{
       console.log("error", err)
     })
+
   }
   
   return (
@@ -113,18 +117,15 @@ const Mail = ({ data }) => {
 
     <div className="mail__texts">
         {/* //? Sender's name */}
-        <p className="mail__text">{data.from_name}</p>
+        <p className="mail__text">{mailState.state.from_name}</p>
         <div className="mail__titleSubtitle">
-          <p className="mail__text">{data.subject}</p>
-          <p className="mail__text mail__body"> - {data.body}</p>
+          <p className="mail__text">{mailState.state.subject}</p>
+          <p className="mail__text mail__body"> - {mailState.state.body}</p>
         </div>
-        <p className="mail__text">{data.date}</p>
+        <p className="mail__text">{mailState.state.date}</p>
       </div>
 
     </div>
-
-
-
 
   );
 };

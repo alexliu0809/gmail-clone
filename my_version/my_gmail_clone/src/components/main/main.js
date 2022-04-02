@@ -79,9 +79,9 @@ const Main = () => {
         }
 
         <div className="main__mails" id="main_mailsofwindow">
-            {mailsOfWindow != undefined && 
-            mailsOfWindow.map((mailcomp, _) => (
-            <Mail data={mailcomp.state}>
+            {mailsOfWindow !== undefined && 
+            mailsOfWindow.map((mailstate, _) => (
+            <Mail mailState={mailstate}>
             </Mail>
             ))
             }
