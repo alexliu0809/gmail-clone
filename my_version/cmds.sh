@@ -9,3 +9,4 @@ npm install --save clsx
 yarn add react-router-dom
 firebase deploy
 yarn add mui
+npm install @mui/material @emotion/react @emotion/styled

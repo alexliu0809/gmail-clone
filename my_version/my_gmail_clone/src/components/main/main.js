@@ -25,14 +25,13 @@ const Main = () => {
     console.log("mailsOfWindow", mailsOfWindow)
   return (
     <div className={`main ${drawerOpen && "main--fullWidth"}`}>
+
         <div className="main__controlBtns">
-            <CheckBox color="secondary" className="mail__check">
-            </CheckBox>
-            <Refresh>
-            </Refresh>
-            <MoreVert>
-            </MoreVert>
+            <Checkbox color="secondary" className="main__check" />
+            <Refresh />
+            <MoreVert />
         </div>
+        
         
         {activeSideBarTab === 'Inbox' &&
 

@@ -1,15 +1,21 @@
 import { Avatar, Button, Checkbox } from "@material-ui/core";
-import { MoreVert, Refresh } from "@material-ui/icons";
+import { MoreVert, Refresh, ArrowBack } from "@material-ui/icons";
 import React from "react";
 import { useLocalContext } from "../../context/context";
 import "./styles.css";
 
+import { useNavigate } from "react-router-dom";
+
+
 const ViewMail = ({ mailState }) => {
   const { drawerOpen, currentUser } = useLocalContext();
+  const navigate = useNavigate();
 
   return (
     <div className={`main ${!drawerOpen && "main--fullWidth"}`}>
       <div className="main__controlBtns">
+        <ArrowBack onClick={() => {navigate("/")}}/>
+        <> </>
         <Checkbox color="secondary" className="main__check" />
         <Refresh />
         <MoreVert />
