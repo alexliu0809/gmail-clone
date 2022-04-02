@@ -6,6 +6,7 @@ import { Inbox, Keyboard, Videocam } from "@material-ui/icons";import React, { u
 import { useLocalContext } from '../../context/context'
 import { useMailContext } from '../../context/mailcontext'
 
+import { useNavigate } from "react-router-dom";
 
 
 const SidebarNavBtn = () => {  
@@ -24,6 +25,8 @@ const SidebarNavBtn = () => {
 export default SidebarNavBtn;
 
 const SideButton = (props) => {
+    const navigate = useNavigate();
+
     const {drawerOpen, setactiveSideBarTab, activeSideBarTab} = useLocalContext();
     const {mailsType, setmailsType} = useMailContext();
 
@@ -31,7 +34,7 @@ const SideButton = (props) => {
         <div className={`sidebar__btn sidebar__topBtn ${
             !drawerOpen && "sidebar__btnClose"
               } ${activeSideBarTab === props.name && "sidebar__active"}`}
-              onClick={() => {setactiveSideBarTab(props.name);}}
+              onClick={() => {setactiveSideBarTab(props.name);navigate('/')}}
               >
             <div
             className={`sidebar__btnLeft ${

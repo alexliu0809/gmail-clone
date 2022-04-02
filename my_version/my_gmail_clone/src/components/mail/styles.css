@@ -53,4 +53,20 @@
   .mail__titleSubtitle {
     display: flex;
     width: 50vw;
+    /**    flex: 1 1 auto; **/
+ 
+  }
+  .mail__date__container{
+    justify-content: flex-end;
+    flex-basis: 168px;
+    flex: 0 0 auto;
+    display: flex;
+  }
+
+  .mail__from__name__container{
+    justify-content: flex-end;
+    max-width: 168px;
+    flex-basis: 168px;
+    flex: 0 0 auto;
+    display: flex;
   }

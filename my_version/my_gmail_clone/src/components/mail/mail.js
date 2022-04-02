@@ -35,30 +35,20 @@ const Mail = ({ mailState }) => {
     setread(mailState.state.read)
   }, [mailState,refresh]);
 
-  const updateRead =() => {
+  const showMailAndUpdateRead =() => {
     //setread(!read);
-    mailState.state.read = !mailState.state.read
-    setRefresh(!refresh)
-    setmailReadRefresh(!mailReadRefresh)
-    console.log("read after", mailState.state.read);
-
+    if (mailState.state.read == false){
+      mailState.state.read = true
+      setRefresh(!refresh)
+      setmailReadRefresh(!mailReadRefresh)
+    }
+    
     // redirect to mailState.state.full_id
     navigate(`/${mailState.state.full_id}`)
   }
 
-  const createMailId = () => {
-    if (id === ""){
-      setid(uuidv4());
-    }
-  }
 
   const updateMailPreference = (props)=>{
-    if (true){
-      //return;
-    }
-    if (id === ""){
-      createMailId();
-    }
 
     setstarred(props.starred)
     setimportant(props.important)
@@ -78,51 +68,57 @@ const Mail = ({ mailState }) => {
   
   return (
     <div className={`mail ${read === false && 'mail--unread'}`}
-    onClick={updateRead}
+    onClick={showMailAndUpdateRead}
     >
-      <Checkbox className="mail--colorGray mail--hoverBlack">
 
-      </Checkbox>
+
       
-      {
-        starred ? (
-          <Star onClick={()=>{updateMailPreference({starred:!starred, important:important})}} className="mail--Yellow"
-          value={starred}
-          >
+        <Checkbox className="mail--colorGray mail--hoverBlack">
 
-          </Star>
+        </Checkbox>
+        
+        {
+          starred ? (
+            <Star onClick={()=>{updateMailPreference({starred:!starred, important:important})}} className="mail--Yellow"
+            value={starred}
+            >
+
+            </Star>
+          ) : (
+            <StarBorder className="mail--colorGray mail--hoeverBlack"
+            onClick={()=>{updateMailPreference({starred:!starred, important:important})}}
+            value={starred}
+            >
+            </StarBorder>
+          )
+        }
+
+        {important ? (
+          <Label
+            onClick={() => {updateMailPreference({starred:starred, important:!important})}}
+            className="mail--Yellow mail__label"
+            value={important}
+          />
         ) : (
-          <StarBorder className="mail--colorGray mail--hoeverBlack"
-          onClick={()=>{updateMailPreference({starred:!starred, important:important})}}
-          value={starred}
-          >
-          </StarBorder>
-        )
-      }
-
-      {important ? (
-        <Label
-          onClick={() => {updateMailPreference({starred:starred, important:!important})}}
-          className="mail--Yellow mail__label"
-          value={important}
-        />
-      ) : (
-        <LabelOutlined
-          onClick={() => {updateMailPreference({starred:starred, important:!important})}}
-          className="mail--colorGray mail--hoverBlack mail__label"
-          value={important}
-        />
-      )}
+          <LabelOutlined
+            onClick={() => {updateMailPreference({starred:starred, important:!important})}}
+            className="mail--colorGray mail--hoverBlack mail__label"
+            value={important}
+          />
+        )}
 
 
-    <div className="mail__texts">
-        {/* //? Sender's name */}
-        <p className="mail__text">{mailState.state.from_name}</p>
-        <div className="mail__titleSubtitle">
-          <p className="mail__text">{mailState.state.subject}</p>
-          <p className="mail__text mail__body"> - {mailState.state.body}</p>
-        </div>
-        <p className="mail__text">{mailState.state.date}</p>
+      <div className="mail__texts">
+          <div className="mail__from__name__container">
+            <p className="mail__from__name__container">{mailState.state.from_name}</p>
+          </div>
+          <div className="mail__titleSubtitle">
+            <p className="mail__text">{mailState.state.subject}</p>
+            <p className="mail__text mail__body"> - {mailState.state.body}</p>
+          </div>
+          <div className="mail__date__container">
+            <p className="mail__text">{mailState.state.date}</p>
+          </div>
       </div>
 
     </div>

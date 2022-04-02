@@ -10,7 +10,7 @@
     "subject": "Subject 1",
     "read": false,
     "category": "Primary",
-    "date": "2020-03-30, 11:09",
+    "date": "7:45 AM",
     "id": 0
   },
   {
@@ -24,7 +24,7 @@
     "subject": "Subject 2",
     "read": true,
     "category": "Primary",
-    "date": "2020-03-30, 11:09",
+    "date": "Apr 1",
     "id": 1
   },
   {
@@ -38,7 +38,7 @@
     "subject": "Subject Promo",
     "read": true,
     "category": "Promotions",
-    "date": "2020-03-30, 11:09",
+    "date": "Mar 31",
     "id": 2
     
   }
