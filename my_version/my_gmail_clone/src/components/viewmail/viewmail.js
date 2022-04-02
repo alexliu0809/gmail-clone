@@ -5,7 +5,7 @@ import { useLocalContext } from "../../context/context";
 import "./styles.css";
 
 const ViewMail = ({ mailState }) => {
-  const { drawerOpen } = useLocalContext();
+  const { drawerOpen, currentUser } = useLocalContext();
 
   return (
     <div className={`main ${!drawerOpen && "main--fullWidth"}`}>
@@ -24,7 +24,9 @@ const ViewMail = ({ mailState }) => {
               <h1 className="viewMail__senderName">{mailState.state.from_name}</h1>
               <p className="viewMail__senderMail">{`<${mailState.state.from}>`}</p>
             </div>
-            <p className="viewMail__info">to me</p>
+            <p className="viewMail__info">to {
+              mailState.state.participant_email === mailState.state.to ? ("me") : (`${mailState.state.to}`)
+            }</p>
           </div>
         </div>
 

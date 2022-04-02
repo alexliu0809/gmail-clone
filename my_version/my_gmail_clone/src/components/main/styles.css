@@ -4,11 +4,11 @@
     box-shadow: inset -1px 0px 0 rgba(255, 255, 255, 0.2);
     height: 100%;
     margin-right: 20px;
+    margin-left: 20px;
   }
   
   .main--fullWidth {
     width: 90%;
-    margin-left: 20px;
   }
   
   .main__controlBtns {
