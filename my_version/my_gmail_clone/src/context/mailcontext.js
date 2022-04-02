@@ -3,6 +3,12 @@ import { useLocalContect, useLocalContext } from "./context";
 import { useEffect } from "react";
 import mails_data from './mail_conf.json';
 import { db } from "../lib/firebase";
+import ReactDOM from 'react-dom';
+
+import { MailComp } from "../components";
+import React from 'react'
+
+
 
 const MailContext = createContext()
 
@@ -30,12 +36,38 @@ export function MailContextProvider({children}){
         
         // console.log("Mails",mails_data);
         for (let i = 0; i < mails_data.length; i++) {
-          let mail_data = mails_data[i]
-          mailArray.push(mail_data)
+          const instance = new MailComp({
+            participant_id:mails_data[i].participant_id,
+            participant_email:mails_data[i].participant_email,
+            from:mails_data[i].from,
+            from_name:mails_data[i].from_name,
+            mailfrom: mails_data[i].mailfrom,
+            to: mails_data[i].to,
+            body: mails_data[i].body,
+            subject:mails_data[i].subject,
+            read:mails_data[i].read,
+            category: mails_data[i].category,
+            date: mails_data[i].date
+        });
+
+        // const instance = <MailComp2 
+        //     participant_id={mails_data[i].participant_id}
+        //     participant_email={mails_data[i].participant_email}
+        //     from={mails_data[i].from}
+        //     from_name={mails_data[i].from_name}
+        //     mailfrom={mails_data[i].mailfrom}
+        //     to={mails_data[i].to}
+        //     body={mails_data[i].body}
+        //     subject={mails_data[i].subject}
+        //     read={mails_data[i].read}
+        //     category={mails_data[i].category}
+        //     date={mails_data[i].date}
+        // />
+          console.log("instance",instance,instance.state.from,instance.state.from_name);
+          mailArray.push(instance)
         }
 
         setallMails(mailArray)
-        console.log("allMails",allMails);
     }
 
     /*
@@ -57,23 +89,24 @@ export function MailContextProvider({children}){
     },[])
 
     useEffect (() => {
+        console.log("allMails", allMails)
         setprimaryUnreadNumber(allMails.filter((e) => {
-            return e.read === false && e.category === "Primary"
+            return e.state.read === false && e.state.category === "Primary"
         }).length);
 
         setsocialUnreadNumber(allMails.filter((e) => {
-            return e.read === false && e.category === "Social"
+            return e.state.read === false && e.state.category === "Social"
         }).length);
 
         setpromoUnreadNumber(allMails.filter((e) => {
-            return e.read === false && e.category === "Promotions"
+            return e.state.read === false && e.state.category === "Promotions"
         }).length);
     },[allMails])
 
     useEffect (() => {
         if (activeSideBarTab === 'Inbox'){
-            console.log("New mailsType", activeMainTab, allMails.filter((mail)=>mail.category===activeMainTab))
-            setmailsOfWindow(allMails.filter((mail)=>mail.category===activeMainTab))
+            console.log("New mailsType", activeMainTab, allMails.filter((mail)=>mail.state.category===activeMainTab))
+            setmailsOfWindow(allMails.filter((mail)=>mail.state.category===activeMainTab))
         } else if (activeSideBarTab === 'All Mail'){
             setmailsOfWindow(allMails.filter(()=>true))
         } else {
@@ -82,10 +115,12 @@ export function MailContextProvider({children}){
     },[activeSideBarTab,activeMainTab,allMails])
     
     const value={setmailsOfWindow,mailsOfWindow,primaryUnreadNumber,socialUnreadNumber,promoUnreadNumber}
+
+
+
     return (
         <MailContext.Provider value={value}>
             {children}
         </MailContext.Provider>
     )
 }
-

@@ -1,6 +1,7 @@
 import { Checkbox } from "@material-ui/core";
 import { CheckBox } from "@material-ui/icons";
 import { useEffect } from "react";
+import ReactDOM from 'react-dom';
 
 import {
   Error,
@@ -20,7 +21,7 @@ import { Mail } from "..";
 const Main = () => {
     const { drawerOpen, activeSideBarTab, activeMainTab, setactiveMainTab } = useLocalContext();
     const { mailsOfWindow, primaryUnreadNumber, socialUnreadNumber, promoUnreadNumber } = useMailContext();
-
+    console.log("mailsOfWindow", mailsOfWindow)
   return (
     <div className={`main ${drawerOpen && "main--fullWidth"}`}>
         <div className="main__controlBtns">
@@ -77,10 +78,13 @@ const Main = () => {
         </div>
         }
 
-        <div className="main__mails">
-            {mailsOfWindow != undefined && mailsOfWindow.map((mail, _) => (
-            <Mail data={mail}/>
-            ))}
+        <div className="main__mails" id="main_mailsofwindow">
+            {mailsOfWindow != undefined && 
+                
+            mailsOfWindow.map((mailcomp, _) => (
+            ReactDOM.render(mailcomp, document.getElementById('root'))
+            ))
+            }
         </div>
 
     </div>
