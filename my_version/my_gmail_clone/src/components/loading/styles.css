@@ -50,7 +50,7 @@ body {
     }
     
     #nlpt::before {
-    animation: a-lb 5s 2.5s linear forwards;
+    animation: a-lb 2s 0.5s linear forwards;
     background-color: #db4437;
     content: "";
     display: block;

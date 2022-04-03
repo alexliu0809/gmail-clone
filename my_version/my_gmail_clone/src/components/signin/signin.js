@@ -34,9 +34,7 @@ const Signin = () =>{
 
       auth.signInWithEmailAndPassword(userEmail, userPassword)
       .then(() => {
-        // alert('logged in')
-        console.log("Loggin")
-        
+        console.log("Loggin")        
       })
       .catch((err) => {
         setloadingTime(false);

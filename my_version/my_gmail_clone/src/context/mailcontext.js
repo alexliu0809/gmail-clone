@@ -65,12 +65,14 @@ export function MailContextProvider({children}){
     another call updates the document snapshot.
     */ 
     useEffect (() => {
-        db.collection("MailPreference")
-        .doc(currentUser.email)
-        .collection("Mail").onSnapshot((snapshot) => {
-           console.log(snapshot.docs)
-        })
-    },[currentUser.email])
+        if (currentUser !== "undefined" && currentUser !== null){
+            db.collection("MailPreference")
+            .doc(currentUser.email)
+            .collection("Mail").onSnapshot((snapshot) => {
+               console.log(snapshot.docs)
+            })
+        }
+    },[currentUser])
 
     useEffect (() => {
         GenMailsFromConfFile();
